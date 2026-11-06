@@ -3,26 +3,9 @@ from datetime import timezone, datetime
 
 
 def transform(energy_info: dict) -> list[dict]:
-    """Convert a ``/v2/price`` response into rows for the raw price table.
+    """Transform API response into records for the raw price table.
 
-    Parameters
-    ----------
-    energy_info : dict
-        Parsed JSON response as returned by ``fetch_price``.
-
-    Returns
-    -------
-    list of dict
-        One dict per element of ``energy_info["data"]``, keyed by column
-        name: ``schema_version``, ``country``, ``bidding_zone``,
-        ``timezone``, ``interval_minutes``, ``unit``, ``api_generated_at``,
-        ``utc_time`` (timezone-aware, in UTC) and ``day_ahead_price``
-        (may be ``None``).
-
-    Raises
-    ------
-    KeyError
-        If an expected field is missing from the response.
+    Timestamps are converted to UTC.
     """
     result = []
     for item in energy_info["data"]:
