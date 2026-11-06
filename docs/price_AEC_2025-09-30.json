@@ -1,0 +1,168 @@
+{
+  "schema_version": "2.0",
+  "endpoint": "price",
+  "country": "de",
+  "bidding_zone": "DE-LU",
+  "timezone": "Europe/Berlin",
+  "resolution": "PT1H",
+  "interval_minutes": 60,
+  "unit": "EUR / MWh",
+  "generated_at": "2026-11-06T00:50:40+01:00",
+  "available_from": "2025-09-30T00:00:00+02:00",
+  "available_until": "2025-09-30T23:00:00+02:00",
+  "series": [
+    {
+      "id": "day_ahead_price",
+      "name": "Day-ahead spot market price"
+    }
+  ],
+  "data": [
+    {
+      "timestamp": "2025-09-30T00:00:00+02:00",
+      "values": {
+        "day_ahead_price": 101.1
+      }
+    },
+    {
+      "timestamp": "2025-09-30T01:00:00+02:00",
+      "values": {
+        "day_ahead_price": 98.43
+      }
+    },
+    {
+      "timestamp": "2025-09-30T02:00:00+02:00",
+      "values": {
+        "day_ahead_price": 98.93
+      }
+    },
+    {
+      "timestamp": "2025-09-30T03:00:00+02:00",
+      "values": {
+        "day_ahead_price": 94.99
+      }
+    },
+    {
+      "timestamp": "2025-09-30T04:00:00+02:00",
+      "values": {
+        "day_ahead_price": 99.12
+      }
+    },
+    {
+      "timestamp": "2025-09-30T05:00:00+02:00",
+      "values": {
+        "day_ahead_price": 112.08
+      }
+    },
+    {
+      "timestamp": "2025-09-30T06:00:00+02:00",
+      "values": {
+        "day_ahead_price": 141.86
+      }
+    },
+    {
+      "timestamp": "2025-09-30T07:00:00+02:00",
+      "values": {
+        "day_ahead_price": 244
+      }
+    },
+    {
+      "timestamp": "2025-09-30T08:00:00+02:00",
+      "values": {
+        "day_ahead_price": 209.23
+      }
+    },
+    {
+      "timestamp": "2025-09-30T09:00:00+02:00",
+      "values": {
+        "day_ahead_price": 141.85
+      }
+    },
+    {
+      "timestamp": "2025-09-30T10:00:00+02:00",
+      "values": {
+        "day_ahead_price": 115.2
+      }
+    },
+    {
+      "timestamp": "2025-09-30T11:00:00+02:00",
+      "values": {
+        "day_ahead_price": 96.72
+      }
+    },
+    {
+      "timestamp": "2025-09-30T12:00:00+02:00",
+      "values": {
+        "day_ahead_price": 87.91
+      }
+    },
+    {
+      "timestamp": "2025-09-30T13:00:00+02:00",
+      "values": {
+        "day_ahead_price": 86.04
+      }
+    },
+    {
+      "timestamp": "2025-09-30T14:00:00+02:00",
+      "values": {
+        "day_ahead_price": 87.26
+      }
+    },
+    {
+      "timestamp": "2025-09-30T15:00:00+02:00",
+      "values": {
+        "day_ahead_price": 96.8
+      }
+    },
+    {
+      "timestamp": "2025-09-30T16:00:00+02:00",
+      "values": {
+        "day_ahead_price": 104.03
+      }
+    },
+    {
+      "timestamp": "2025-09-30T17:00:00+02:00",
+      "values": {
+        "day_ahead_price": 142.64
+      }
+    },
+    {
+      "timestamp": "2025-09-30T18:00:00+02:00",
+      "values": {
+        "day_ahead_price": 294.54
+      }
+    },
+    {
+      "timestamp": "2025-09-30T19:00:00+02:00",
+      "values": {
+        "day_ahead_price": 357.77
+      }
+    },
+    {
+      "timestamp": "2025-09-30T20:00:00+02:00",
+      "values": {
+        "day_ahead_price": 147.28
+      }
+    },
+    {
+      "timestamp": "2025-09-30T21:00:00+02:00",
+      "values": {
+        "day_ahead_price": 116.04
+      }
+    },
+    {
+      "timestamp": "2025-09-30T22:00:00+02:00",
+      "values": {
+        "day_ahead_price": 101.63
+      }
+    },
+    {
+      "timestamp": "2025-09-30T23:00:00+02:00",
+      "values": {
+        "day_ahead_price": 92.54
+      }
+    }
+  ],
+  "attributes": {},
+  "license": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de",
+  "deprecated": false
+}
