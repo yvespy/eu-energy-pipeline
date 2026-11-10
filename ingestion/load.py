@@ -1,15 +1,16 @@
 import json
 import os
+from pathlib import Path
 
+import psycopg2
+from dotenv import load_dotenv
 from psycopg2 import extras
 
 from ingestion.transform import transform
-import psycopg2
-from dotenv import load_dotenv
 
 load_dotenv()
 
-columns = (
+COLUMNS = (
     "schema_version",
     "country",
     "bidding_zone",
@@ -23,30 +24,47 @@ columns = (
 
 
 def convert_data_for_load(data: list[dict]) -> list[tuple]:
-    result = [tuple(row.values()) for row in data]
-    return result
+    return [
+        tuple(row[col] for col in COLUMNS)
+        for row in data
+    ]
 
 
 def load_to_db(transformed_data: list[tuple]) -> None:
-    conn = psycopg2.connect(
-        dbname=os.getenv("POSTGRES_DB"),
-        user=os.getenv("POSTGRES_USER"),
-        password=os.getenv("POSTGRES_PASSWORD"),
-        host=os.getenv("POSTGRES_HOST"),
-        port=os.getenv("POSTGRES_PORT"),
-    )
+    conn = None
 
-    cur = conn.cursor()
-    query = f"INSERT INTO raw.energy_charts_price ({', '.join(columns)}) VALUES %s"
-    extras.execute_values(cur, query, transformed_data)
-    conn.commit()
+    try:
+        conn = psycopg2.connect(
+            dbname=os.environ["POSTGRES_DB"],
+            user=os.environ["POSTGRES_USER"],
+            password=os.environ["POSTGRES_PASSWORD"],
+            host=os.environ["POSTGRES_HOST"],
+            port=os.environ["POSTGRES_PORT"],
+        )
 
-    cur.close()
-    conn.close()
+        query = (
+            f"INSERT INTO raw.energy_charts_price ({', '.join(COLUMNS)}) "
+            "VALUES %s "
+            "ON CONFLICT (bidding_zone, utc_time) "
+            "DO UPDATE SET "
+            "day_ahead_price = EXCLUDED.day_ahead_price, "
+            "api_generated_at = EXCLUDED.api_generated_at "
+            "WHERE "
+            "raw.energy_charts_price.day_ahead_price "
+            "IS DISTINCT FROM EXCLUDED.day_ahead_price"
+        )
+        with conn:
+            with conn.cursor() as cur:
+                extras.execute_values(cur, query, transformed_data)
+    finally:
+        if conn is not None:
+            conn.close()
 
 
 if __name__ == "__main__":
-    with open("../docs/price_dst_fallback_2026-10-25.json", "r", encoding="utf-8") as f:
+    file_path = Path(__file__).resolve().parent.parent / "docs" / "price_dst_fallback_2026-10-25.json"
+
+    with file_path.open("r", encoding="utf-8") as f:
         json_data = json.load(f)
 
     transform_data = transform(json_data)
